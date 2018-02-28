@@ -26,7 +26,12 @@ func main() {
 	fmt.Printf("%#v\n", result)
 	fmt.Printf("%#v\n", result.InsertedID)
 
-	fmt.Println(collection.Count(context.Background(), bson.NewDocument(
+	count, err := collection.Count(context.Background(), bson.NewDocument(
 		bson.EC.Int32("qty", 100),
-	)))
+	))
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Printf("%T %v\n", count, count)
 }
